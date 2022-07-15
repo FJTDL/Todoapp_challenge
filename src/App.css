@@ -30,6 +30,7 @@
   background-image: url(./images/bg.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 }
 
 /* User */
@@ -411,4 +412,75 @@
 
 .ProjectForm button:hover {
   filter: brightness(1.1);
+}
+
+/* Todo */
+
+.Todos{
+  width: 450px;
+  height: 80%;
+  background-color: white;
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  border-radius: 4px;
+  opacity: 0.9;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+}
+
+.Todos .selected-project {
+  margin: 1rem 0;
+  text-transform : capitalize;
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.Todos .todos {
+  overflow-y: auto;
+}
+
+/*Todo */
+
+.Todo {
+  padding: 0.5rem 1rem;
+}
+
+.Todo .todo-container {
+  display: flex;
+  align-items: center;
+}
+
+.Todo .todo-container span {
+  cursor: pointer;
+}
+
+.Todo .todo-container .text {
+  position: relative;
+  flex: 1;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.Todo .todo-container .text span {
+  font-size: 0.8rem;
+  color: #bebebe;
+}
+
+.Todo .todo-container .text .line {
+  height: 1px;
+  background:#bebebe;
+  position: absolute;
+  top:25%;
+  width: 0;
+  transition: width 250ms ease-in-out
+}
+
+.Todo .todo-container .text .line {
+  width: 100%;
+}
+
+.Todo .todo-container .add-to-next-day {
+  margin-right: 10px;
 }
