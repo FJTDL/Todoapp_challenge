@@ -1,15 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Modal from './Modal';
-import {Bell, CalendarDay, Clock, Palette, X} from 'react-bootstrap-icons';
-import {DatePicker, TimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
+import TodoForm from "./TodoForm";
+import {TodoContext} from '../context';
 
 
 function AddNewTodo() {
+
+    const {selectedProject} = useContext(TodoContext);
+
     const [showModal, setShowModal] = useState(false);
     const [text, setText] = useState('');
     const [day, setDay] = useState(new Date());
     const [time, setTime] = useState(new Date());
+    const [todoProject, setTodoProject] = useState(selectedProject);
+
+    
+
+    const projects = [
+        {id: 1, name: "Personal", numOfTodos: 0},
+        {id: 2, name: "Work", numOfTodos: 3},
+        {id: 3, name: "General", numOfTodos: 0}
+    ]
+
+    function handleSubmit (e) {
+
+    } 
+
+    useEffect( () => {
+        setTodoProject(selectedProject)
+    }, [selectedProject])
 
     return (
         <div className="AddNewTodo">
@@ -20,59 +39,21 @@ function AddNewTodo() {
             </div>
             
             <Modal showModal={showModal} setShowModal={setShowModal}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <form>
-                    <div className="text">
-                        <h3>Add New to do</h3>
-                        <input type='text' value={text} onChange={ e => setText(e.target.value)} placeholder='To Do ...' autoFocus/>
-                    </div>
-                    <div className="remind">
-                        <Bell />
-                        <p>Remind Me!</p>
-                    </div>
-                    <div className="pick-day">
-                        <div className="title">
-                            <CalendarDay />
-                            <p>Choose a day</p>
-                        </div>
-                        <DatePicker 
-                            value={day}
-                            onChange={day => setDay(day)}
-                        />
-                    </div>
-                    <div className="pick-time">
-                        <div className="title">
-                            <Clock />
-                            <p>Choose Time</p>
-                        </div>
-                        <TimePicker 
-                            value={time}
-                            onChange={time => setTime(time)}
-                        />
-                    </div>
-                    <div className="pick-project">
-                        <div className="title">
-                            <Palette />
-                            <p>Choose a project</p>
-                            project-picker
-                        </div>
-                        <div className="projects">
-                            <div className="project active">
-                                personal
-                            </div>
-                            <div className="project">
-                                work
-                            </div>
-                        </div>
-                    </div>
-                    <div className="cancel" onClick={() => setShowModal(false)}>
-                        <X size="40"/>
-                    </div>
-                    <div className="confirm">
-                        <button> + Add To Do</button>
-                    </div>
-                </form>
-                </MuiPickersUtilsProvider>
+                <TodoForm 
+                    handleSubmit={handleSubmit}
+                    heading="Add new To Do"
+                    text={text}
+                    setText={setText}
+                    day={day}
+                    setDay={setDay}
+                    time={time}
+                    setTime={setTime}
+                    todoProject={todoProject}
+                    setTodoProject={setTodoProject}
+                    projects={projects}
+                    showButtons={true}
+                    setShowModal={setShowModal}
+                />
             </Modal>
         </div>
 
