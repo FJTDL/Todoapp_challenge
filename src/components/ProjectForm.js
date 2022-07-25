@@ -9,9 +9,9 @@ function ProjectForm({handleSubmit, heading, value, setValue, setShowModal, conf
                 onChange={(e) => setValue(e.target.value)}
                 type='text'
                 placeholder="Project Name"
-                autofocus
+                autoFocus
             />
-            <button className="cancel" role="button" onClick={() => setShowModal(false)}>
+            <button className="cancel" onClick={() => setShowModal(false)}>
                 Cancel
             </button>
             <button className="confirm">

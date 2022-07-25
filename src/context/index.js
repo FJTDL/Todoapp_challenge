@@ -5,7 +5,7 @@ import {useTodos, useProjects, useFilterTodos} from '../hooks';
 const TodoContext = createContext();
 
 function TodoContextProvider({children}) {
-    const defaultProject = 'today';
+    const defaultProject = 'all days';
     const [selectedProject, setSelectedProject] = useState(defaultProject)
 
     const todos = useTodos();
