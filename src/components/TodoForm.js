@@ -55,7 +55,6 @@ function TodoForm({
                     <div className="title">
                         <Palette />
                         <p>Choose a project</p>
-                        project-picker
                     </div>
                     <div className="projects">
                         {

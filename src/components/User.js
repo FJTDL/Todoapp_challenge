@@ -9,7 +9,7 @@ function User() {
             </div>
             <div className='info'>
                 <p>Callum W</p>
-                <a href="">Logout</a>
+                <a>Logout</a>
             </div>
         </div>
 
