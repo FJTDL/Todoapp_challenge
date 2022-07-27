@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
-import {CheckCircleFill, Circle, ArrowClockwise, Trash } from 'react-bootstrap-icons';
+import React, {useState, useContext} from 'react';
+import {CheckCircleFill, Circle, Trash, Pencil } from 'react-bootstrap-icons';
 import firebase from '../firebase';
+import Modal from './Modal';
+import EditTodo from './EditTodo';
+import { TodoContext } from '../context'
 
 function Todo({todo}) {
+
+    const { setSelectedTodo} = useContext(TodoContext)
     const [hover, setHover] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const deleteTodo = todo => {
         firebase
@@ -12,6 +18,15 @@ function Todo({todo}) {
             .doc(todo.id)
             .delete()
     }
+    const checkTodo = todo => {
+        firebase
+            .firestore()
+            .collection('todos')
+            .doc(todo.id)
+            .update({
+                checked: !todo.checked
+            })
+    }
     return (
         <div className="Todo">
             <div 
@@ -19,7 +34,10 @@ function Todo({todo}) {
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
             >
-                <div className="check-todo">
+                <div 
+                    className="check-todo"
+                    onClick={ () => checkTodo(todo)}
+                >
                     {
                         todo.checked ?
                         <span className="checked">
@@ -36,17 +54,26 @@ function Todo({todo}) {
                     <span>{todo.time} - {todo.projectName}</span>
                     <div className={`line ${todo.checked ? 'line-through': ''}`}></div>
                 </div>
-                <div className="add-to-next-day">
+                <div
+                    className="edit-todo-button"
+                    onClick={ () => {
+                        setSelectedTodo(todo)
+                        setShowModal(true)
+                    }}    
+                >
                     {
-                        todo.checked &&
+                        hover &&
                         <span>
-                            <ArrowClockwise />
+                            <Pencil size="13" />
                         </span>
                     }
                 </div>
                 <div 
                     className="delete-todo"
-                    onClick={ () => deleteTodo(todo)}
+                    onClick={ () => {
+                        deleteTodo(todo)
+                        setSelectedTodo(undefined)
+                    }}
                 >
                     {
                         (hover || todo.checked) &&
@@ -56,6 +83,9 @@ function Todo({todo}) {
                     }
                 </div>
             </div>
+            <Modal showModal={showModal} setShowModal={setShowModal}>
+                <EditTodo />
+            </Modal>
         </div>
 
     )

@@ -481,16 +481,13 @@
   width: 100%;
 }
 
-.Todo .todo-container .add-to-next-day {
+.Todo .todo-container .edit-todo-button {
   margin-right: 10px;
 }
 
 /* EditTodo */
 
-.EditTodo {
-  position: absolute;
-  bottom: 40px;
-  left: calc(40px + 450px + 40px);
+.EditTodo .TodoForm {
   background-color:white;
   height: 80%;
   width: 450px;
@@ -498,14 +495,17 @@
   opacity: 0.9;
 }
 
-.EditTodo .header {
-  margin: 1rem 0.5rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  padding-bottom: 2px;
-  border-bottom: 1px solid #eee;
-
+.EditTodo form .confirm button {
+  width: 100%;
+  height: 40px;
+  background: #0080ff;
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
 }
+
 
 /* Next 7 days */
 

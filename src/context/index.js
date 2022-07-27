@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import {useTodos, useProjects, useFilterTodos} from '../hooks';
+import {useTodos, useProjects, useFilterTodos, useProjectsWithStats} from '../hooks';
 
 
 const TodoContext = createContext();
@@ -7,10 +7,12 @@ const TodoContext = createContext();
 function TodoContextProvider({children}) {
     const defaultProject = 'all days';
     const [selectedProject, setSelectedProject] = useState(defaultProject)
-
+    const [selectedTodo, setSelectedTodo] = useState(undefined)
     const todos = useTodos();
-    const projects = useProjects(todos);
+    const projects = useProjects();
+    const projectsWithStats = useProjectsWithStats(projects, todos);
     const filteredTodos = useFilterTodos(todos, selectedProject)
+    const [editModal, setEditModal] = useState(false)
     return (
         <TodoContext.Provider
             value={
@@ -19,7 +21,11 @@ function TodoContextProvider({children}) {
                     selectedProject,
                     setSelectedProject,
                     todos: filteredTodos,
-                    projects
+                    projects :projectsWithStats,
+                    selectedTodo,
+                    setSelectedTodo,
+                    editModal,
+                    setEditModal
                 }
             }
         >
