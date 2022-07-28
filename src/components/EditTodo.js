@@ -7,6 +7,7 @@ import firebase from '../firebase'
 function EditTodo() {
     const [text, setText] = useState('');
     const [day, setDay] = useState(new Date());
+    const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [todoProject, setTodoProject] = useState('');
 
@@ -15,7 +16,8 @@ function EditTodo() {
     useEffect(() => {
         if (selectedTodo) {
             setText(selectedTodo.text)
-            setDay(moment(selectedTodo.day, 'DD/MM/YYYY'))
+            setDay(moment(selectedTodo.day, 'd'))
+            setDate(moment(selectedTodo.date, 'DD/MM/YYYY'))
             setTime(moment(selectedTodo.time, 'hh:mm A'))
             setTodoProject(selectedTodo.projectName)
         }
@@ -28,12 +30,12 @@ function EditTodo() {
                 .doc(selectedTodo.id)
                 .update({
                     text,
-                    date: moment(day).format('DD/MM/YYYY'),
+                    date: moment(date).format('DD/MM/YYYY'),
                     day: moment(day).format('d'),
                     time: moment(time).format('hh:mm A'),
                     projectName : todoProject
                 })
-    }, [text, day, time, todoProject, selectedTodo])
+    }, [text, day, date, time, todoProject, selectedTodo])
 
     function handleSubmit (e) {
         e.preventDefault();

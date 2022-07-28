@@ -16,38 +16,50 @@ function AddNewTodo() {
     const [day, setDay] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [todoProject, setTodoProject] = useState(selectedProject);
-    const [isValid, setIsValid] = useState(false);
-    const [inputError, setInputError] = useState()
+    //const [isValid, setIsValid] = useState(false);
+    const [inputError, setInputError] = useState();
+    let isValid = false;
+    let isTextValid = false;
+    let isProjectsValid = false;
+    let isTodayValid = false;
 
     function handleSubmit (e) {
         e.preventDefault()
 
         if (text) {
-            setIsValid(true)
+            isTextValid = true;
         } else {
             setInputError('Please input a title')
         }
 
         if (!calendarItems.includes(todoProject)) {
-            setIsValid(true)
+            isProjectsValid=true;
         } else {
             setInputError('Please select a project')
         }
-
-        const currentDay = moment().format('DD/MM/YYYY')
-        const currentTime = moment().format('hh:mm A')
-        const currentDayFormatted = moment(currentDay, 'DD/MM/YYY')
-        const currentTimeFormatted = moment(currentTime, 'hh:mm A')
+        
+        const currentDayFormatted = moment()
+        const currentTimeFormatted = moment()
         const todoDate = moment(day, 'DD/MM/YYYY')
         const todoTime = moment(time, 'hh:mm A')
+        const diffDays = todoDate.diff(currentDayFormatted, 'days')
 
-        if ((todoTime >= currentTimeFormatted) && (todoDate >= currentDayFormatted)) {
-            setIsValid(true)
-        } else {
-            setInputError('Please select a date/time in the future')
+        if ((todoDate.format('DD/MM/YYYY') === currentDayFormatted.format('DD/MM/YYYY')) && (todoTime >= currentTimeFormatted)) {
+            isTodayValid=true;
+        } else if ((todoDate.format('DD/MM/YYYY') === currentDayFormatted.format('DD/MM/YYYY')) && (todoTime <= currentTimeFormatted)) {
+            console.log("second")
+            setInputError('Please select a valid time')
+            isTodayValid=true;
+        } else if (diffDays >=0) {
+            isTodayValid = true;
+        } else  {
+            setInputError('Please select a valid date')
+        }
+
+        if ( isTextValid && isProjectsValid && isTodayValid ) {
+            isValid = true;
         }
  
-
         if (isValid) {
             firebase
                 .firestore()
@@ -68,8 +80,10 @@ function AddNewTodo() {
             setText('')
             setDay(new Date())
             setTime(new Date())
-            setIsValid(false)
-            setInputError()
+            isValid=false
+            setInputError(undefined)
+        } else {
+            isValid=false
         }
     } 
 

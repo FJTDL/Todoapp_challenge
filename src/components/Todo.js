@@ -91,7 +91,7 @@ function Todo({todo}) {
                 </div>
             </div>
             <Modal showModal={showModal} setShowModal={setShowModal}>
-                <EditTodo />
+                <EditTodo/>
             </Modal>
         </animated.div>
 
