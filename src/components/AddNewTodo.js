@@ -17,9 +17,6 @@ function AddNewTodo() {
     const [time, setTime] = useState(new Date());
     const [todoProject, setTodoProject] = useState(selectedProject);
 
-    
-
-
 
     function handleSubmit (e) {
         e.preventDefault()

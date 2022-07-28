@@ -36,7 +36,7 @@ function EditTodo() {
     }, [text, day, time, todoProject, selectedTodo])
 
     function handleSubmit (e) {
-        
+        e.preventDefault();
     } 
 
     return (
@@ -56,7 +56,7 @@ function EditTodo() {
                                 todoProject={todoProject}
                                 setTodoProject={setTodoProject}
                                 projects={projects}
-                                showButtons={true}
+                                showButtons={false}
                             />
                     </div>
                 </div>

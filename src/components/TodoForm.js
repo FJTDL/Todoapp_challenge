@@ -82,7 +82,7 @@ function TodoForm({
                             <X size="40"/>
                         </div>
                         <div className="confirm">
-                            <button onClick={() => setShowModal(false)}> Submit </button>
+                            <button> Submit </button>
                         </div>
                     </div>
                 }

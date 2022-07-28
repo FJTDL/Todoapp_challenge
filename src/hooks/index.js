@@ -73,7 +73,7 @@ export function useProjects(){
             setProjects(data)
         })
 
-        return () => {unsubscribe()}
+        return () => unsubscribe()
     }, [])
 
     return projects

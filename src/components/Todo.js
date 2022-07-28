@@ -3,7 +3,8 @@ import {CheckCircleFill, Circle, Trash, Pencil } from 'react-bootstrap-icons';
 import firebase from '../firebase';
 import Modal from './Modal';
 import EditTodo from './EditTodo';
-import { TodoContext } from '../context'
+import { TodoContext } from '../context';
+import {useSpring, animated} from 'react-spring';
 
 function Todo({todo}) {
 
@@ -27,8 +28,14 @@ function Todo({todo}) {
                 checked: !todo.checked
             })
     }
+
+    const fadeIn = useSpring({
+        from : { marginTop : '-12px', opacity: 0},
+        to : {marginTop : '0px', opacity : 1}
+    })
+
     return (
-        <div className="Todo">
+        <animated.div style={fadeIn} className="Todo">
             <div 
                 className="todo-container"
                 onMouseEnter={() => setHover(true)}
@@ -86,7 +93,7 @@ function Todo({todo}) {
             <Modal showModal={showModal} setShowModal={setShowModal}>
                 <EditTodo />
             </Modal>
-        </div>
+        </animated.div>
 
     )
 }
