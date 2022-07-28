@@ -13,7 +13,8 @@ function TodoForm({
     todoProject, setTodoProject,
     projects, 
     showButtons = false,
-    setShowModal= false
+    setShowModal= false,
+    inputError
 }) {
 
     return (
@@ -74,6 +75,12 @@ function TodoForm({
                             </div>
                         }
                     </div>
+                    {
+                        inputError ?
+                        <div className="errorText">{inputError}</div>
+                        :
+                        <div></div>
+                    }
                 </div>
                 {
                     showButtons &&

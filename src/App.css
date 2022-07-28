@@ -53,6 +53,10 @@
   font-family: 700;
  }
 
+ .User .info p span {
+  font-weight: 600;
+ }
+
  .User .info a {
   text-decoration: none;
   display: flex;
@@ -521,4 +525,10 @@
 
 .Next7Days .day .total-todos {
   margin-left: 10px;
+}
+
+/* Error Text */
+
+.errorText {
+  color: red;
 }

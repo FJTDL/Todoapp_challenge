@@ -1,15 +1,10 @@
 import React from 'react'
-import logo from '../images/logo.jpg'
 
 function User() {
     return (
         <div className="User">
-            <div className="logo">
-                <img src={logo} alt="logo"/>
-            </div>
             <div className='info'>
-                <p>Callum W</p>
-                <a>Logout</a>
+                <p><span>Todo App</span> - Callum W</p>
             </div>
         </div>
 

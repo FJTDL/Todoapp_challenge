@@ -12,16 +12,43 @@ function AddNewTodo() {
     const {projects, selectedProject} = useContext(TodoContext);
 
     const [showModal, setShowModal] = useState(false);
-    const [text, setText] = useState('');
+    const [text, setText] = useState();
     const [day, setDay] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [todoProject, setTodoProject] = useState(selectedProject);
-
+    const [isValid, setIsValid] = useState(false);
+    const [inputError, setInputError] = useState()
 
     function handleSubmit (e) {
         e.preventDefault()
 
-        if ( text && !calendarItems.includes(todoProject)) {
+        if (text) {
+            setIsValid(true)
+        } else {
+            setInputError('Please input a title')
+        }
+
+        if (!calendarItems.includes(todoProject)) {
+            setIsValid(true)
+        } else {
+            setInputError('Please select a project')
+        }
+
+        const currentDay = moment().format('DD/MM/YYYY')
+        const currentTime = moment().format('hh:mm A')
+        const currentDayFormatted = moment(currentDay, 'DD/MM/YYY')
+        const currentTimeFormatted = moment(currentTime, 'hh:mm A')
+        const todoDate = moment(day, 'DD/MM/YYYY')
+        const todoTime = moment(time, 'hh:mm A')
+
+        if ((todoTime >= currentTimeFormatted) && (todoDate >= currentDayFormatted)) {
+            setIsValid(true)
+        } else {
+            setInputError('Please select a date/time in the future')
+        }
+ 
+
+        if (isValid) {
             firebase
                 .firestore()
                 .collection('todos')
@@ -41,6 +68,8 @@ function AddNewTodo() {
             setText('')
             setDay(new Date())
             setTime(new Date())
+            setIsValid(false)
+            setInputError()
         }
     } 
 
@@ -71,6 +100,7 @@ function AddNewTodo() {
                     projects={projects}
                     showButtons={true}
                     setShowModal={setShowModal}
+                    inputError={inputError}
                 />
             </Modal>
         </div>
