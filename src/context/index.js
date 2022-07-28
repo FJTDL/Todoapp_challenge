@@ -12,7 +12,7 @@ function TodoContextProvider({children}) {
     const projects = useProjects();
     const projectsWithStats = useProjectsWithStats(projects, todos);
     const filteredTodos = useFilterTodos(todos, selectedProject)
-    const [editModal, setEditModal] = useState(false)
+    const [editModal, setEditModal] = useState()
     return (
         <TodoContext.Provider
             value={

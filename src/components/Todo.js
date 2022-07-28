@@ -8,9 +8,8 @@ import {useSpring, animated} from 'react-spring';
 
 function Todo({todo}) {
 
-    const { setSelectedTodo} = useContext(TodoContext)
+    const { setSelectedTodo, editModal, setEditModal} = useContext(TodoContext)
     const [hover, setHover] = useState(false);
-    const [showModal, setShowModal] = useState(false);
 
     const deleteTodo = todo => {
         firebase
@@ -65,7 +64,7 @@ function Todo({todo}) {
                     className="edit-todo-button"
                     onClick={ () => {
                         setSelectedTodo(todo)
-                        setShowModal(true)
+                        setEditModal(true)
                     }}    
                 >
                     {
@@ -90,7 +89,7 @@ function Todo({todo}) {
                     }
                 </div>
             </div>
-            <Modal showModal={showModal} setShowModal={setShowModal}>
+            <Modal showModal={editModal} setShowModal={setEditModal}>
                 <EditTodo/>
             </Modal>
         </animated.div>
