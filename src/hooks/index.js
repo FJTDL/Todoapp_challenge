@@ -45,7 +45,7 @@ export function useFilterTodos(todos, selectedProject) {
             })
         } else if (selectedProject === 'All days') {
             data = todos
-        } else{
+        } else {
             data = todos.filter(todo => todo.projectName === selectedProject)
         }
 

@@ -5,29 +5,30 @@ import moment from 'moment';
 import firebase from '../firebase'
 
 function EditTodo() {
+    const { selectedTodo : todo} = useContext(TodoContext)
     const [text, setText] = useState('');
     const [day, setDay] = useState(new Date());
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [todoProject, setTodoProject] = useState('');
 
-    const { selectedTodo, projects} = useContext(TodoContext)
 
     useEffect(() => {
-        if (selectedTodo) {
-            setText(selectedTodo.text)
-            setDay(moment(selectedTodo.day, 'd'))
-            setDate(moment(selectedTodo.date, 'DD/MM/YYYY'))
-            setTime(moment(selectedTodo.time, 'hh:mm A'))
-            setTodoProject(selectedTodo.projectName)
+        if (todo) {
+            setText(todo.text)
+            setDay(moment(todo.day, 'd'))
+            setDate(moment(todo.date, 'DD/MM/YYYY'))
+            setTime(moment(todo.time, 'hh:mm A'))
+            setTodoProject(todo.projectName)
+            console.log("this should only be called once?")
         }
-    }, [selectedTodo])
+    }, [todo])
 
     useEffect(() => {
             firebase
                 .firestore()
                 .collection('todos')
-                .doc(selectedTodo.id)
+                .doc(todo.id)
                 .update({
                     text,
                     date: moment(date).format('DD/MM/YYYY'),
@@ -35,7 +36,7 @@ function EditTodo() {
                     time: moment(time).format('hh:mm A'),
                     projectName : todoProject
                 })
-    }, [text, day, date, time, todoProject, selectedTodo])
+    }, [text, day, date, time, todoProject, todo.id])
 
     function handleSubmit (e) {
         e.preventDefault();
@@ -44,7 +45,7 @@ function EditTodo() {
     return (
         <div>
             {
-                selectedTodo &&
+                todo &&
                 <div className="EditTodo">
                     <div className="container">
                         <TodoForm 
@@ -57,8 +58,9 @@ function EditTodo() {
                                 setTime={setTime}
                                 todoProject={todoProject}
                                 setTodoProject={setTodoProject}
-                                projects={projects}
+                                projects={""}
                                 showButtons={false}
+                                editProject={true}
                             />
                     </div>
                 </div>

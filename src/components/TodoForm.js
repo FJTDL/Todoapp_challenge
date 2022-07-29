@@ -14,7 +14,8 @@ function TodoForm({
     projects, 
     showButtons = false,
     setShowModal= false,
-    inputError
+    inputError,
+    editProject = false
 }) {
 
     return (
@@ -52,6 +53,7 @@ function TodoForm({
                         onChange={time => setTime(time)}
                     />
                 </div>
+                {!editProject &&
                 <div className="pick-project">
                     <div className="title">
                         <Palette />
@@ -82,6 +84,7 @@ function TodoForm({
                         <div></div>
                     }
                 </div>
+                }
                 {
                     showButtons &&
                     <div>
