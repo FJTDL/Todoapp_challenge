@@ -16,7 +16,6 @@ function AddNewTodo() {
     const [day, setDay] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [todoProject, setTodoProject] = useState(selectedProject);
-    //const [isValid, setIsValid] = useState(false);
     const [inputError, setInputError] = useState();
     let isValid = false;
     let isTextValid = false;
@@ -68,7 +67,8 @@ function AddNewTodo() {
                     {
                         text: text,
                         date: moment(day).format('DD/MM/YYYY'),
-                        day: moment(day).format('d'),
+                        day: moment(day).format('E'),
+                        overallDay: moment(day).format('YYYY-MM-DD hh:mm:ss a'),
                         time: moment(time).format('hh:mm A'),
                         checked: false,
                         color : '#000',

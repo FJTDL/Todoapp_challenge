@@ -7,9 +7,9 @@ import firebase from '../firebase'
 function EditTodo() {
     const { selectedTodo : todo} = useContext(TodoContext)
     const [text, setText] = useState('');
-    const [day, setDay] = useState(new Date());
-    const [date, setDate] = useState(new Date());
-    const [time, setTime] = useState(new Date());
+    const [day, setDay] = useState(moment(todo.day, 'd'));
+    const [overallDay, setOverallDay] = useState(todo.overallDay);
+    const [time, setTime] = useState(moment(todo.time, 'hh:mm A'));
     const [todoProject, setTodoProject] = useState('');
 
 
@@ -17,10 +17,9 @@ function EditTodo() {
         if (todo) {
             setText(todo.text)
             setDay(moment(todo.day, 'd'))
-            setDate(moment(todo.date, 'DD/MM/YYYY'))
+            setOverallDay(todo.overallDay)
             setTime(moment(todo.time, 'hh:mm A'))
             setTodoProject(todo.projectName)
-            console.log("this should only be called once?")
         }
     }, [todo])
 
@@ -31,12 +30,13 @@ function EditTodo() {
                 .doc(todo.id)
                 .update({
                     text,
-                    date: moment(date).format('DD/MM/YYYY'),
+                    date: moment(day).format('DD/MM/YYYY'),
                     day: moment(day).format('d'),
+                    overallDay: moment(overallDay).format('YYYY-MM-DD hh:mm:ss a'),
                     time: moment(time).format('hh:mm A'),
                     projectName : todoProject
                 })
-    }, [text, day, date, time, todoProject, todo.id])
+    }, [text, day, time, todoProject, todo.id, overallDay])
 
     function handleSubmit (e) {
         e.preventDefault();
@@ -52,7 +52,7 @@ function EditTodo() {
                                 handleSubmit={handleSubmit}
                                 text={text}
                                 setText={setText}
-                                day={day}
+                                day={overallDay}
                                 setDay={setDay}
                                 time={time}
                                 setTime={setTime}
