@@ -1,3 +1,5 @@
+// IMPORTS ALL FILES AND REACT AND CSS
+
 import React from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
@@ -8,6 +10,7 @@ import Calendar from './components/Calendar';
 import AddNewTodo from './components/AddNewTodo';
 import Todos from './components/Todos';
 
+// MAIN CONTAIN RETURNS ALL COMPONENTS
 function App() {
   return (
     <div className='App'>
@@ -24,4 +27,5 @@ function App() {
   );
 }
 
+// EXPORTS APP
 export default App;

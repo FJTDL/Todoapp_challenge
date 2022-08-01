@@ -1,6 +1,8 @@
+//IMPORTS REACT
 import React from 'react'
 
 function Sidebar({children}) {
+    // RENDERED CONTENT
     return (
         <div className="Sidebar">
             {children}
@@ -8,5 +10,5 @@ function Sidebar({children}) {
 
     )
 }
-
+// EXPORTS COMPONENT
 export default Sidebar;

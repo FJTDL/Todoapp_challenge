@@ -1,10 +1,17 @@
+// IMPORTS LIBRARIES AND FILES
+
 import React, { useEffect, useState } from 'react'
 import moment from 'moment';
 import  Todo  from './Todo';
 
+
+// NEXT7DAYS FUNCTIONS
 function Next7Days({todos}) {
+    // STATES
     const [weekTodos, setWeekTodos] = useState([])
 
+    // EFFECTS CALLED EACH TIME TODOS ARE CHANGED
+    // RETURNS FILTERED TODOS
     useEffect( () => {
         const days = ['0', '1', '2', '3', '4', '5', '6'];
 
@@ -20,6 +27,8 @@ function Next7Days({todos}) {
 
         setWeekTodos(arrangeDays)
     }, [todos])
+
+    //RENDERED CONTENT
     return (
         <div className='Next7Days'>
             {
@@ -48,5 +57,5 @@ function Next7Days({todos}) {
         </div>
     )
 }
-
+// EXPORTS FUNCTION
 export default Next7Days;

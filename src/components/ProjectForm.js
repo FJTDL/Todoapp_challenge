@@ -1,6 +1,16 @@
+// IMPORTS REACT
+
 import React from 'react';
 
-function ProjectForm({handleSubmit, heading, value, setValue, setShowModal, confirmButtonText}) {
+function ProjectForm({
+        handleSubmit,
+        heading,
+        value,
+        setValue,
+        setShowModal,
+        confirmButtonText
+    }) {
+    // RENDERED CONTENT
     return (
         <form className="ProjectForm" onSubmit={handleSubmit}>
             <h3>{heading}</h3>
@@ -20,5 +30,5 @@ function ProjectForm({handleSubmit, heading, value, setValue, setShowModal, conf
         </form>
     )   
 }
-
+// EXPORTS FUNCTIONS
 export default ProjectForm;

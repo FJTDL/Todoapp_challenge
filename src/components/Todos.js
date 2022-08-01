@@ -1,11 +1,14 @@
+// IMPORTS LIBRARIES AND FILES
 import React, {useContext} from 'react'
 import Todo from './Todo'
 import Next7Days from './Next7Days';
 import { TodoContext } from '../context'
 
 function Todos() {
+    // CONTEXT
     const {todos, selectedProject} = useContext(TodoContext)
 
+    // RENDERED CONTENT
     return (
         <div className="Todos">
             <div className="selected-project">
@@ -25,5 +28,5 @@ function Todos() {
 
     )
 }
-
+// EXPORT COMPONENT
 export default Todos

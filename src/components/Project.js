@@ -1,3 +1,5 @@
+// IMPORTS LIBRARIES AND FILES
+
 import React, {useContext, useState} from 'react';
 import RenameProject from './RenameProject';
 import Modal from './Modal';
@@ -8,10 +10,13 @@ import {useSpring, animated, useTransition} from 'react-spring';
 
 
 function Project({project, edit}) {
+    // CONTEXT
     const { defaultProject, selectedProject,  setSelectedProject} = useContext(TodoContext)
 
+    // STATE
     const [showModal, setShowModal] = useState(false);
 
+    // DELETE PROJECT FUNC
     const deleteProject = project => {
         firebase
             .firestore()
@@ -37,6 +42,7 @@ function Project({project, edit}) {
             })
     }
 
+    // ANIMATION
     const fadeIn = useSpring({
         from : { marginTop : '-12px', opacity: 0},
         to : {marginTop : '0px', opacity : 1}
@@ -48,6 +54,7 @@ function Project({project, edit}) {
         leave : {opacity : 0, right : '-20px'}
     })
 
+    // ANIMATIONS
     return (
         <animated.div style={fadeIn} className="Project">
             <div className="name" onClick={() => setSelectedProject(project.name)}>
@@ -89,4 +96,5 @@ function Project({project, edit}) {
     )
 }
 
+// EXPORTS FUNCTION
 export default Project;

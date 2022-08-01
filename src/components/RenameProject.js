@@ -1,19 +1,25 @@
+// IMPORTS LIBRARIES AND FILES
+
 import React, {useState, useContext} from 'react';
 import ProjectForm from './ProjectForm'
 import firebase from '../firebase'
 import { TodoContext } from '../context';
 
 function RenameProject({project, setShowModal}) {
+    // STATE
     const [newProjectName, setNewProjectName] = useState(project.name);
 
+    // CONTEXT
     const {selectedProject, setSelectedProject} = useContext(TodoContext)
 
+    // RENAME PROJECT FUNCTION
     const renameProject = (project, newProjectName) => {
         const projectsRef = firebase.firestore().collection('projects')
         const todosRef = firebase.firestore().collection('todos')
 
         const { name : oldProjectName } = project
 
+        // UPDATES PROJECT NAMES AND TODOS
         projectsRef
             .where('name', '==', newProjectName)
             .get()
@@ -46,7 +52,7 @@ function RenameProject({project, setShowModal}) {
                 }
             })
     }
-
+    // HANDLE SUBMIT
     function handleSubmit(e) {
         e.preventDefault()
 
@@ -54,7 +60,7 @@ function RenameProject({project, setShowModal}) {
 
         setShowModal(false);
     }
-
+    // RENDERED CONTENT
     return (
         <div className="RenameProject">
             <ProjectForm 
@@ -69,5 +75,5 @@ function RenameProject({project, setShowModal}) {
 
     )
 }
-
+// EXPORT FUNCTION
 export default RenameProject

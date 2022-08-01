@@ -1,3 +1,4 @@
+// IMPORTS LIBRARIES AND FILES
 import React from 'react';
 import {Bell, CalendarDay, Clock, Palette, X} from 'react-bootstrap-icons';
 import {DatePicker, TimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
@@ -17,7 +18,7 @@ function TodoForm({
     inputError,
     editProject = false
 }) {
-
+    //RENDERED CONTENT
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <form onSubmit={handleSubmit} className="TodoForm">
@@ -100,5 +101,5 @@ function TodoForm({
         </MuiPickersUtilsProvider>
     )
 }
-
+// EXPORTS COMPONENT
 export default TodoForm;

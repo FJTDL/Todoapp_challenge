@@ -1,3 +1,5 @@
+// importing necessary libraries and files
+
 import React, {useState, useContext, useEffect} from 'react';
 import Modal from './Modal';
 import TodoForm from "./TodoForm";
@@ -6,25 +8,31 @@ import {calendarItems} from '../constants';
 import firebase from '../firebase';
 import moment from 'moment'
 
-
+// function for add new todo
 function AddNewTodo() {
-
+    // CONTEXT
     const {projects, selectedProject} = useContext(TodoContext);
 
+    // INITIALISING STATES
     const [showModal, setShowModal] = useState(false);
     const [text, setText] = useState();
     const [day, setDay] = useState(new Date());
     const [time, setTime] = useState(new Date());
     const [todoProject, setTodoProject] = useState(selectedProject);
     const [inputError, setInputError] = useState();
+
+    // INITIZIALING VARIABLE
     let isValid = false;
     let isTextValid = false;
     let isProjectsValid = false;
     let isTodayValid = false;
 
+    // HANDLE SUBMIT FUNCTIONS
     function handleSubmit (e) {
+        // PREVENT PAGE FROM RELOADING
         e.preventDefault()
 
+        // INPUT ERROR HANDLING
         if (text) {
             isTextValid = true;
         } else {
@@ -58,7 +66,7 @@ function AddNewTodo() {
         if ( isTextValid && isProjectsValid && isTodayValid ) {
             isValid = true;
         }
- 
+        // CREATES NEW TODO 
         if (isValid) {
             firebase
                 .firestore()
@@ -75,7 +83,7 @@ function AddNewTodo() {
                         projectName: todoProject
                     }
                 )
-
+            // RESETS STATES
             setShowModal(false)
             setText('')
             setDay(new Date())
@@ -86,11 +94,13 @@ function AddNewTodo() {
             isValid=false
         }
     } 
-
+    // SET PROJECT WHEN USER CLICKS ON A PROJECT
     useEffect( () => {
         setTodoProject(selectedProject)
     }, [selectedProject])
 
+
+    // RENDERED CONTENT
     return (
         <div className="AddNewTodo">
             <div className="btn">
@@ -121,5 +131,5 @@ function AddNewTodo() {
 
     )
 }
-
+// EXPORT FUNCTION
 export default AddNewTodo;

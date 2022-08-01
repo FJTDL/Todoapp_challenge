@@ -1,15 +1,21 @@
+// IMPORT LIBRARIES AND FILES
+
 import React, {useContext, useState} from 'react'
 import { CalendarDate, CaretUp } from 'react-bootstrap-icons';
 import{calendarItems } from '../constants/index';
 import {TodoContext} from '../context';
 import { useSpring, animated } from 'react-spring';
 
+
+// CALENDAR FUNCTION
 function Calendar() {
+    // STATES
     const [showMenu, setShowMenu] = useState(true)
 
+    // CONTEXT
     const {setSelectedProject} = useContext(TodoContext)
     
-    // Animation
+    // ANIMATIONS
     const spin = useSpring({
         transform : showMenu ? 'rotate(0deg)' : 'rotate(180deg)',
         config : {friction : 10}
@@ -21,6 +27,7 @@ function Calendar() {
         config : { friction : 15}
     })
 
+    // RENDERED CONTENT
     return (
         <div className="Calendar">
             <div className="header">
@@ -56,5 +63,5 @@ function Calendar() {
 
     )
 }
-
+// EXPORT FUNCTION
 export default Calendar;

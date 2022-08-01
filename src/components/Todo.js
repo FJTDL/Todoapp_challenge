@@ -1,3 +1,4 @@
+//IMPORTS LIBRARIES AND FILES
 import React, {useState, useContext} from 'react';
 import {CheckCircleFill, Circle, Trash, Pencil } from 'react-bootstrap-icons';
 import firebase from '../firebase';
@@ -8,9 +9,13 @@ import {useSpring, animated} from 'react-spring';
 
 function Todo({todo}) {
 
+    // CONTEXT
     const { setSelectedTodo, editModal, setEditModal} = useContext(TodoContext)
+
+    // STATE
     const [hover, setHover] = useState(false);
 
+    // DELETE TODO
     const deleteTodo = todo => {
         firebase
             .firestore()
@@ -18,6 +23,8 @@ function Todo({todo}) {
             .doc(todo.id)
             .delete()
     }
+
+    // CHECK TODO
     const checkTodo = todo => {
         firebase
             .firestore()
@@ -28,11 +35,13 @@ function Todo({todo}) {
             })
     }
 
+    // ANIMATION
     const fadeIn = useSpring({
         from : { marginTop : '-12px', opacity: 0},
         to : {marginTop : '0px', opacity : 1}
     })
 
+    // RENDERED CONTENT
     return (
         <animated.div style={fadeIn} className="Todo">
             <div 
@@ -96,4 +105,6 @@ function Todo({todo}) {
 
     )
 }
+
+//EXPORT COMPONENT
 export default Todo;

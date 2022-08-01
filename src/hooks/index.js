@@ -1,10 +1,15 @@
+// IMPORTS LIBRARIES AND FILES
 import { useState, useEffect } from 'react';
 import firebase from '../firebase';
 import moment from 'moment';
 
+
+// FUNCTION TO GET TODOS
 export function useTodos(){
+    //STATES
     const [todos, setTodos] = useState([])
 
+    // USE EFFECT
     useEffect(() => {
         let unsubscribe = firebase
         .firestore()
@@ -24,10 +29,12 @@ export function useTodos(){
 
     return todos
 }
-
+// FUNCTIONS TO FILTER TODOS
 export function useFilterTodos(todos, selectedProject) {
+    //STATE
     const [filteredTodos, setFilteredTodos] = useState([]);
 
+    // ON CHANGE FUNCTION
     useEffect( () => {
         let data;
         const todayDateFormatted = moment().format('DD/MM/YYYY')
@@ -55,9 +62,12 @@ export function useFilterTodos(todos, selectedProject) {
     return filteredTodos;
 }
 
+// FUNCTION TO GET PROJECT
 export function useProjects(){
+    //STATE
     const [projects, setProjects] = useState([])
 
+    // ONCHANGE
     useEffect(() => {
         let unsubscribe = firebase
         .firestore()
@@ -78,10 +88,11 @@ export function useProjects(){
 
     return projects
 }
-
+// FUNCTION TO FIND NUM OF TODOS PER PROJECT
 export function useProjectsWithStats(projects, todos) {
+    //STATE
     const [projectsWithStats, setProjectsWithStats] = useState([])
-    
+    // ONCHANGE
     useEffect( () => {
         const data = projects.map((project) => {
             return {
@@ -94,4 +105,4 @@ export function useProjectsWithStats(projects, todos) {
     }, [projects, todos])
 
     return projectsWithStats;
-}
+} 

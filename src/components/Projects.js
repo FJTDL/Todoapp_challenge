@@ -1,3 +1,5 @@
+// IMPORTS LIBRARIES AND FILES
+
 import React, {useState, useContext} from 'react'
 import { PencilFill, Palette, CaretUp } from 'react-bootstrap-icons';
 import AddNewProject from './AddNewProject';
@@ -5,14 +7,19 @@ import Project from './Project';
 import {TodoContext} from '../context';
 import {useSpring, animated} from 'react-spring'; 
 
+
 function Projects() {
+    // STATES
     const [showMenu, setShowMenu] = useState(true);
     const [edit, setEdit] = useState(false);
+
+    // VARIABLE
     const pencilColor = edit ? "#1EC94C" : "#000";
     
+    // CONTEXT
     const { projects } = useContext(TodoContext)
 
-    // Animation
+    // ANIMATION
     const spin = useSpring({
         transform : showMenu ? 'rotate(0deg)' : 'rotate(180deg)',
         config : {friction : 10}
@@ -24,6 +31,7 @@ function Projects() {
         config : { friction : 15}
     })
 
+    // RENDERED CONTENT
     return (
         <div className="Projects">
             <div className="header">
@@ -64,5 +72,5 @@ function Projects() {
 
     )
 }
-
+// EXPORTS FUNCTION
 export default Projects

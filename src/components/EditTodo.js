@@ -1,3 +1,5 @@
+//IMPORT LIBRARIES AND FILES
+
 import React, {useState, useContext, useEffect} from 'react';
 import TodoForm from './TodoForm';
 import { TodoContext} from '../context';
@@ -5,14 +7,17 @@ import moment from 'moment';
 import firebase from '../firebase'
 
 function EditTodo() {
+    //CONTEXT
     const { selectedTodo : todo} = useContext(TodoContext)
+
+    // STATES
     const [text, setText] = useState('');
     const [day, setDay] = useState(moment(todo.day, 'd'));
     const [overallDay, setOverallDay] = useState(todo.overallDay);
     const [time, setTime] = useState(moment(todo.time, 'hh:mm A'));
     const [todoProject, setTodoProject] = useState('');
 
-
+    // UPDATING STATES WITH VALUES
     useEffect(() => {
         if (todo) {
             setText(todo.text)
@@ -23,6 +28,7 @@ function EditTodo() {
         }
     }, [todo])
 
+    // UPDATES TODO
     useEffect(() => {
             firebase
                 .firestore()
@@ -37,11 +43,12 @@ function EditTodo() {
                     projectName : todoProject
                 })
     }, [text, day, time, todoProject, todo.id, overallDay])
-
+    // HANDLE SUBMIT
     function handleSubmit (e) {
         e.preventDefault();
     } 
 
+    // RENDERED CONTENT
     return (
         <div>
             {
@@ -69,5 +76,5 @@ function EditTodo() {
 
     )
 }
-
+// EXPORT FUNCTION
 export default EditTodo
