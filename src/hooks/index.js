@@ -46,8 +46,7 @@ export function useFilterTodos(todos, selectedProject) {
                 const todoDate = moment(todo.date, 'DD/MM/YYYY')
                 const todayDate = moment(todayDateFormatted, 'DD/MM/YYYY')
 
-                const diffDays = todoDate.diff(todayDate, 'days')
-
+                const diffDays = todoDate.diff(todayDate, 'd')
                 return diffDays >= 0 && diffDays < 7
             })
         } else if (selectedProject === 'All days') {
@@ -55,7 +54,7 @@ export function useFilterTodos(todos, selectedProject) {
         } else {
             data = todos.filter(todo => todo.projectName === selectedProject)
         }
-
+        console.log(data)
         setFilteredTodos(data)
     }, [todos, selectedProject])
 

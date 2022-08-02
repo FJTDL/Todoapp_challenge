@@ -21,7 +21,7 @@ function EditTodo() {
     useEffect(() => {
         if (todo) {
             setText(todo.text)
-            setDay(moment(todo.day, 'd'))
+            setDay(moment(todo.overallDay, 'd'))
             setOverallDay(todo.overallDay)
             setTime(moment(todo.time, 'hh:mm A'))
             setTodoProject(todo.projectName)
@@ -36,8 +36,8 @@ function EditTodo() {
                 .doc(todo.id)
                 .update({
                     text,
-                    date: moment(day).format('DD/MM/YYYY'),
-                    day: moment(day).format('d'),
+                    date: moment(overallDay).format('DD/MM/YYYY'),
+                    day: moment(overallDay).format('d'),
                     overallDay: moment(overallDay).format('YYYY-MM-DD hh:mm:ss a'),
                     time: moment(time).format('hh:mm A'),
                     projectName : todoProject
@@ -60,7 +60,7 @@ function EditTodo() {
                                 text={text}
                                 setText={setText}
                                 day={overallDay}
-                                setDay={setDay}
+                                setDay={setOverallDay}
                                 time={time}
                                 setTime={setTime}
                                 todoProject={todoProject}
