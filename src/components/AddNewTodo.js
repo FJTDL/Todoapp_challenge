@@ -56,7 +56,7 @@ function AddNewTodo() {
         } else if ((todoDate.format('DD/MM/YYYY') === currentDayFormatted.format('DD/MM/YYYY')) && (todoTime <= currentTimeFormatted)) {
             console.log("second")
             setInputError('Please select a valid time')
-            isTodayValid=true;
+            isTodayValid=false;
         } else if (diffDays >=0) {
             isTodayValid = true;
         } else  {
