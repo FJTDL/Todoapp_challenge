@@ -66,7 +66,7 @@ function Todo({todo}) {
                 </div>
                 <div className="text">
                     <p style={{color: todo.checked ? '#bebebe' : '#000'}} >{todo.text}</p>
-                    <span>{todo.time} - {todo.projectName}</span>
+                    <span>{todo.time} - {todo.projectName} - {todo.date}</span>
                     <div className={`line ${todo.checked ? 'line-through': ''}`}></div>
                 </div>
                 <div
