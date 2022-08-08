@@ -1,6 +1,6 @@
 // IMPORTS LIBRARIES AND FILES
 import React from 'react';
-import {Bell, CalendarDay, Clock, Palette, X} from 'react-bootstrap-icons';
+import {CalendarDay, Clock, Palette, X} from 'react-bootstrap-icons';
 import {DatePicker, TimePicker, MuiPickersUtilsProvider} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 
@@ -30,10 +30,7 @@ function TodoForm({
                     }
                     <input type='text' value={text} onChange={ e => setText(e.target.value)} placeholder='To Do ...' autoFocus/>
                 </div>
-                <div className="remind">
-                    <Bell />
-                    <p>Remind Me!</p>
-                </div>
+                
                 <div className="pick-day">
                     <div className="title">
                         <CalendarDay />

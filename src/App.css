@@ -144,11 +144,6 @@
   border-bottom: 1px solid var(--prim-colour);
 }
 
-.TodoForm .remind {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-}
 
 .TodoForm p {
   margin-left: 10px;
